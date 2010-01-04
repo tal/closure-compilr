@@ -8,12 +8,12 @@ module ClosureCompilr
   # YAY THIS WORKS!!!
   class JSCompilation
     class << self
-      def root;@@root;end
-      def root=r;@@root=r;end
-      def js_path;@@js_path;end
-      def js_path=j;@@js_path=j;end
-      def write_path;@@write_path;end
-      def write_path=w;@@write_path=w;end
+      def root;@@root;end# :nodoc:
+      def root=(r);@@root=r;end
+      def js_path;@@js_path;end# :nodoc:
+      def js_path=(j);@@js_path=j;end
+      def write_path;@@write_path;end# :nodoc:
+      def write_path=(w);@@write_path=w;end
     end
     if defined? Merb
       @@root,@@js_path = Merb.root_path, File.join('public','javascripts')
@@ -23,7 +23,9 @@ module ClosureCompilr
       @@write_path = File.join(@@root,@@js_path)
     end
     attr_accessor :file,:filename,:other_files,:write_path
-
+    
+    
+    # Pass the file name to be compiled
     def initialize(fname,opts={})
       @root = opts.fetch(:root,@@root)
 
@@ -52,7 +54,8 @@ module ClosureCompilr
       end
 
     end
-
+    
+    # Full path of the source file
     def file_path
       File.join(@@root,@@js_path,filename)
     end
@@ -71,13 +74,15 @@ module ClosureCompilr
     def output_path
       File.join @write_path, output_filename
     end
-
+    
+    # Compile's the javascript file and all dependencies
     def compile
-      output = `java -jar closure-compiler.jar -js #{all_files.join(' ')} --js_output_file #{output_path}.test`
+      output = `java -jar closure-compiler.jar -js #{all_files.join(' ')} --js_output_file #{output_path}`
     end
   end
 
   # Error type returned if there was an error compiling
   class JSCompilationFailed < StandardError; end
+  # Error type returned if one of hte dependencies listed wasn't found
   class JSCompInvalidFile < JSCompilationFailed; end
 end

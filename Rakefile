@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "closure-compilr"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Gem for using google's closure compiler on your own javascript files}
+    gem.description = %Q{A gem for combining and minimizing your javascript files using google's closure compiler.}
     gem.email = "me@talatlas.com"
     gem.homepage = "http://github.com/Talby/closure-compilr"
     gem.authors = ["Tal Atlas"]

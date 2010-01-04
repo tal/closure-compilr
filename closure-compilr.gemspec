@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/closure-compiler.jar",
+     "closure-compilr.gemspec",
      "lib/closure-compilr.rb",
      "spec/closure-compilr_spec.rb",
      "spec/spec.opts",

@@ -38,7 +38,7 @@ module ClosureCompilr
       @@root,@@js_path = RAILS_ROOT, File.join('public','javascripts')
       @@write_path = File.join(@@root,@@js_path)
     end
-    attr_accessor :file,:filename,:other_files,:write_path
+    attr_accessor :file,:filename,:other_files,:write_path, :compiler_version
     
     
     # ==== Params
@@ -93,9 +93,13 @@ module ClosureCompilr
       File.join @write_path, output_filename
     end
     
+    def compiler_file_location # :nodoc:
+      @compiler_version ? output_path File.join(File.dirname(__FILE__),'..','bin',"closure-compiler-#{@compiler_version}.jar") : COMPILER_FILE_LOCATION
+    end
+    
     # Compile's the javascript file and all dependencies
     def compile
-      output = `java -jar #{COMPILER_FILE_LOCATION} -js #{all_files.join(' ')} --js_output_file #{output_path}`
+      output = `java -jar #{compiler_file_location} -js #{all_files.join(' ')} --js_output_file #{output_path}`
       output_path
     end
     alias compress compile

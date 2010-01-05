@@ -5,14 +5,30 @@ module ClosureCompilr
   COMPILER_VERSION = 20091217
   
   
-  # YAY THIS WORKS!!!
+  #   JSCompilation.new('myjsfile.js').compile #=> /user/me/projects/myproject/public/javascripts/myjsfile.min.js
   class JSCompilation
-    class << self
-      def root;@@root;end# :nodoc:
+    class << self 
+      def root# :nodoc:
+        @@root;
+      end
+      
+      # Manually set the root path of the application you're using
+      #   JSCompilation.root = '/user/me/projects/myproject'
       def root=(r);@@root=r;end
-      def js_path;@@js_path;end# :nodoc:
+      
+      def js_path# :nodoc:
+        @@js_path
+      end
+      
+      # Manually set the storage location for javascript files relative to the root path
+      #   JSCompilation.js_path = 'public/javascripts'
       def js_path=(j);@@js_path=j;end
-      def write_path;@@write_path;end# :nodoc:
+      
+      def write_path# :nodoc:
+        @@write_path
+      end
+      # The directory to output the completed file. Defaults to root path combined with js_path
+      #   JSCompilation.write_path = '/user/me/projects/myproject/public/javascripts'
       def write_path=(w);@@write_path=w;end
     end
     if defined? Merb
@@ -25,7 +41,9 @@ module ClosureCompilr
     attr_accessor :file,:filename,:other_files,:write_path
     
     
-    # Pass the file name to be compiled
+    # ==== Params
+    # - fname:      Filename of javascript file to compile
+    # - opts:       Options to pass
     def initialize(fname,opts={})
       @root = opts.fetch(:root,@@root)
 
@@ -78,7 +96,9 @@ module ClosureCompilr
     # Compile's the javascript file and all dependencies
     def compile
       output = `java -jar closure-compiler.jar -js #{all_files.join(' ')} --js_output_file #{output_path}`
+      output_path
     end
+    alias compress compile
   end
 
   # Error type returned if there was an error compiling

@@ -95,7 +95,7 @@ module ClosureCompilr
     
     # Compile's the javascript file and all dependencies
     def compile
-      output = `java -jar closure-compiler.jar -js #{all_files.join(' ')} --js_output_file #{output_path}`
+      output = `java -jar #{COMPILER_FILE_LOCATION} -js #{all_files.join(' ')} --js_output_file #{output_path}`
       output_path
     end
     alias compress compile
@@ -106,3 +106,5 @@ module ClosureCompilr
   # Error type returned if one of hte dependencies listed wasn't found
   class JSCompInvalidFile < JSCompilationFailed; end
 end
+
+include ClosureCompilr

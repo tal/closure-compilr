@@ -5,15 +5,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{closure-compilr}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tal Atlas"]
-  s.date = %q{2010-01-04}
-  s.default_executable = %q{closure-compiler.jar}
+  s.date = %q{2010-01-12}
   s.description = %q{A gem for combining and minimizing your javascript files using google's closure compiler.}
   s.email = %q{me@talatlas.com}
-  s.executables = ["closure-compiler.jar"]
+  s.executables = ["closure-compiler-20091217.jar", "closure-compiler.jar"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -25,6 +24,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "bin/closure-compiler-20091217.jar",
      "bin/closure-compiler.jar",
      "closure-compilr.gemspec",
      "lib/closure-compilr.rb",

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tal Atlas"]
-  s.date = %q{2010-01-12}
+  s.date = %q{2010-01-13}
   s.description = %q{A gem for combining and minimizing your javascript files using google's closure compiler.}
   s.email = %q{me@talatlas.com}
   s.executables = ["closure-compiler-20091217.jar", "closure-compiler.jar"]

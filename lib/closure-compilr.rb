@@ -131,11 +131,15 @@ module ClosureCompilr # :nodoc:
     
     # Compile's the javascript file and all dependencies
     def compile
-      extras = String.new
-      extras << " --compilation_level #{@compilation_level}" if @compilation_level
-      extras << " --formatting #{@formatting}" if @formatting
+      cmd = "java -jar #{compiler_file_location}"
+      cmd << " --compilation_level #{@compilation_level}" if @compilation_level
+      cmd << " --formatting #{@formatting}" if @formatting
+      all_files.each do |file|
+        cmd << " --js #{file}"
+      end
+      cmd << " --js_output_file #{output_path}"
       
-      output = `java -jar #{compiler_file_location}#{extras}  -js #{all_files.join(' ')} --js_output_file #{output_path}`
+      output = `#{cmd}`
       
       output_path
     end
